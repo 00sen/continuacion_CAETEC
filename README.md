@@ -2,7 +2,7 @@
 ## José Pablo A01275676
 ## Luis Arturo A01703572
 ### Despliegue de modelo para camas mediante script de python
-### -------------------------------------------
+### ________________________________________________________________
 ### 🧠 Requisitos
 1. Python 3.8 o superior (compatible con 3.13)
 2. Tener `pip` y acceso a una terminal
@@ -33,7 +33,6 @@ Si una imagen está dañada o no es reconocida, el script la omite automáticame
 
 ### 📁 Estructura del proyecto
 ``` text
-.
 ├── script.py              # Script principal
 ├── requirements.txt       # Librerías necesarias
 ├── model.pt               # Modelo entrenado (tú lo colocas)
