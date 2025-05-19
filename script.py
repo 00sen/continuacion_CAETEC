@@ -1,9 +1,4 @@
 #!/usr/bin/env python3
-"""
-Sort images by number of cows detected with a YOLOv5 `.pt` checkpoint.
-Usage:
-    python3 script.py /path/to/images --weights model.pt --device cuda:0
-"""
 
 # ----------------------------------------------------------------------
 # 0. WindowsPath hot-patch (needed when loading a checkpoint saved on Windows)
