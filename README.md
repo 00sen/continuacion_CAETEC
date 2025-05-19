@@ -32,6 +32,8 @@ Por cada imagen procesada:
 Si una imagen está dañada o no es reconocida, el script la omite automáticamente y continúa sin detenerse. Al final te reportará que imágenes fallaron.
 
 ### 📁 Estructura del proyecto
+``` text
+.
 ├── script.py              # Script principal
 ├── requirements.txt       # Librerías necesarias
 ├── model.pt               # Modelo entrenado (tú lo colocas)
