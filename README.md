@@ -4,24 +4,35 @@
 ### Despliegue de modelo para camas mediante script de python
 ### ________________________________________________________________
 ### 🧠 Requisitos
-1. Python 3.8 o superior (compatible con 3.13)
+1. Python 3.9 o superior
 2. Tener `pip` y acceso a una terminal
 3. Instalar los paquetes necesarios:
 pip install -r requirements.txt
 ⚠️ El paquete yolov5 ya incluye PyTorch (versión CPU).
-Si quieres usar GPU, instala PyTorch manualmente con soporte CUDA antes de instalar yolov5.
+
+### Ayuda con git
+El proyecto completo se encuentra en el repositorio presente
+- Si se quiere bajar se deberá tener instalado git
+- Se podrá clonar de manera local utilizando el siguiente comando: git clone https://github.com/00sen/continuacion_CAETEC.git
 
 ### ▶️ Cómo usar el script
 python script.py <carpeta_imagenes> [opciones]
-Parámetros
-input_folder: Carpeta con las imágenes a procesar
---weights: Ruta al archivo del modelo .pt (por defecto: model.pt)
---output: Carpeta donde se guardarán las imágenes clasificadas (por defecto: by_cow_count)
---device: Dispositivo de ejecución: cpu, cuda, etc. (por defecto: cpu)
---imgsz: Tamapo al que se redimensionan las imágenes antes de analizarlas (default: 640)
+Parámetros opcionales:
+--model: Apunta al archivo del modelo .pt (por defecto: modelBeds.pt)
+--format: Resultado deseado. (images) si se quiere el resultado como imágenes con los recuadros pintados. (csv) si se quieren los resultados impresos en un csv. Por default (csv) 
+Ejemplos de comando completo:
+python script.py imagenes/ --model modelExample.pt --format images
+python script.py imagenes/ --model modelExample.pt --format csv
+python script.py imagenes/ 
 
 ### 🖼️ Qué produce el script
 Por cada imagen procesada:
+Si se eligió (csv) el cual es por defecto
+- Se cuenta cuántas vacas hay.
+- Se genera un csv con el nombre de la imagen, la cantidad de vacas y las camas
+  que se están utilizando, de solo ser una cama será solo un número, de ser 2 o
+más serán múltiples números entre comillas "".
+Si se eligió (images)
 - Se cuenta cuántas vacas hay.
 - Se genera una versión bb_<nombre>.jpg de la imagen con los recuadros verdes dibujados
 
@@ -35,6 +46,5 @@ Si una imagen está dañada o no es reconocida, el script la omite automáticame
 ``` text
 ├── script.py              # Script principal
 ├── requirements.txt       # Librerías necesarias
-├── model.pt               # Modelo entrenado (tú lo colocas)
-├── imagenes/              # Carpeta con imágenes a analizar
-└── by_cow_count/          # Resultado final clasificado por cantidad de vacas
+├── model.pt               # Modelo entrenado
+├── imagenes/              # Carpeta con imágenes a analizar (no en el repo)
