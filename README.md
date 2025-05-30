@@ -25,10 +25,10 @@ El proyecto completo se encuentra en el repositorio presente
 - Se podrá clonar de manera local utilizando el siguiente comando: git clone https://github.com/00sen/continuacion_CAETEC.git
 
 ### ▶️ Cómo usar el script
-python script.py <carpeta_imagenes> [opciones]
+python script.py <carpeta_imagenes> [opciones]  
 Parámetros opcionales:
 - --model: Apunta al archivo del modelo .pt (por defecto: modelBeds.pt)
-- --format: Resultado deseado. (images) si se quiere el resultado como imágenes con los recuadros pintados. (csv) si se quieren los resultados impresos en un csv. Por default (csv) 
+- --format: Resultado deseado. (images) si se quiere el resultado como imágenes con los recuadros pintados. (csv) si se quieren los resultados impresos en un csv. Por default (csv)     
 Ejemplos de comando completo:  
 python script.py imagenes/ --model modelExample.pt --format images  
 python script.py imagenes/ --model modelExample.pt --format csv  
