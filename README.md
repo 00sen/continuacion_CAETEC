@@ -1,7 +1,7 @@
 # Continuación CAETEC
 ## José Pablo A01275676
 ## Luis Arturo A01703572
-### Despliegue de modelo para camas mediante script de python
+### Despliegue de modelo para camas (y otros) mediante script de python
 ### ________________________________________________________________
 ### Información de modelos
 - El modelo para el que se desarrolló el script.py fue para el modelo
