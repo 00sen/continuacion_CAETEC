@@ -3,6 +3,15 @@
 ## Luis Arturo A01703572
 ### Despliegue de modelo para camas mediante script de python
 ### ________________________________________________________________
+### Información de modelos
+- El modelo para el que se desarrolló el script.py fue para el modelo
+modelBeds.py, sin embargo se puede cargar cualquier modelo que haya sido
+entrenado con YOLOv5.
+- El nuevo modelo entrenado, (el nuevo ángulo de la fila) puede ser cargado, se
+  llama newModelRows.pt, en el csv serán impresos resultados de "que camas se
+usan", resultado que puede ignorarse si se usa un modelo que no sea de camas.
+De elegirse la opción images se dibujarán cajar verdes en las vacas ubicadas sin
+ningún problema.
 ### 🧠 Requisitos
 1. Python 3.9 o superior
 2. Tener `pip` y acceso a una terminal
