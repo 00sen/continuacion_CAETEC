@@ -37,15 +37,16 @@ python script.py imagenes/ --model modelExample.pt --format csv
 python script.py imagenes/  
 
 ### 🖼️ Qué produce el script
-Por cada imagen procesada:
-Si se eligió (csv) el cual es por defecto
-- Se cuenta cuántas vacas hay.
+Por cada imagen procesada:  
+Si se eligió (csv) el cual es por defecto  
+- Se cuenta cuántas vacas hay.  
 - Se genera un csv con el nombre de la imagen, la cantidad de vacas y las camas
   que se están utilizando, de solo ser una cama será solo un número, de ser 2 o
-más serán múltiples números entre comillas "".
-Si se eligió (images)
-- Se cuenta cuántas vacas hay.
-- Se genera una versión bb_<nombre>.jpg de la imagen con los recuadros verdes dibujados
+más serán múltiples números entre comillas "".  
+
+Si se eligió (images)  
+- Se cuenta cuántas vacas hay.  
+- Se genera una versión bb_<nombre>.jpg de la imagen con los recuadros verdes dibujados  
 
 ### ⚙️ Personalización
 - Para cambiar los colores, grosor de los recuadros o texto, puedes modificar la función draw_boxes() en el archivo script.py
