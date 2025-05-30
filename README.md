@@ -58,5 +58,5 @@ Si una imagen está dañada o no es reconocida, el script la omite automáticame
 ``` text
 ├── script.py              # Script principal
 ├── requirements.txt       # Librerías necesarias
-├── model.pt               # Modelo entrenado
+├── modelBeds.pt           # Modelo entrenado
 ├── imagenes/              # Carpeta con imágenes a analizar (no en el repo)
