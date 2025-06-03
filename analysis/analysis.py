@@ -11,10 +11,9 @@ PREDS        = "RESULTADO_CSV.csv"   # CSV que genera tu modelo
 GROUND_TRUTH = "ground_truth.csv"    # CSV con valores correctos
 
 # ----------------------------------------------------------------------
-# Función auxiliar
+# Función auxiliar para adaptar diferencias en los CSV
 # ----------------------------------------------------------------------
 def parse_beds_str(beds_str: str) -> set[int]:
-    """Convierte "0,1" → {0,1}. Cadena vacía/NaN → set()."""
     if pd.isna(beds_str) or str(beds_str).strip() == "":
         return set()
     return set(int(x) for x in str(beds_str).split(",") if x.strip().isdigit())
@@ -22,37 +21,39 @@ def parse_beds_str(beds_str: str) -> set[int]:
 # ----------------------------------------------------------------------
 # 1. Carga de datos
 # ----------------------------------------------------------------------
-df_pred = pd.read_csv(PREDS)            # filename, n_cows, beds
-df_gt   = pd.read_csv(GROUND_TRUTH)     # filename, n_cows, beds
+# Predicciones
+df_pred = pd.read_csv(PREDS)
+# Datos reales
+df_gt   = pd.read_csv(GROUND_TRUTH)
 df_gt = df_gt.rename(columns={"n_cows": "true_n_cows", "beds": "true_beds"})
 
 # ----------------------------------------------------------------------
-# 2. Merge predicciones ↔ ground-truth
+# 2. Juntamos ambos CSV en un dataframe
 # ----------------------------------------------------------------------
 df = pd.merge(df_gt, df_pred, on="filename", how="inner", validate="one_to_one")
 
 # ----------------------------------------------------------------------
-# 3. Métricas por imagen
+# 3. Datos por imagen
 # ----------------------------------------------------------------------
 err_counts           = []
 correct_count_flags  = []
 correct_beds_flags   = []
-hamming_list         = []      # ← lista para Hamming Loss por imagen
+hamming_list         = []
 
 for _, row in df.iterrows():
-    # ---------- Conteo ----------
+    # Sacamos el error o igualdad entre el número de vacas
     true_nc = int(row["true_n_cows"])
     pred_nc = int(row["n_cows"])
     err_counts.append(abs(pred_nc - true_nc))
     correct_count_flags.append(int(pred_nc == true_nc))
 
-    # ---------- Camas ----------
+    # Sacamos si es correcta o no el resultado de las camas usadas
     true_beds = parse_beds_str(row["true_beds"])
     pred_beds = parse_beds_str(row["beds"])
     correct_beds_flags.append(int(pred_beds == true_beds))
 
     # Hamming Loss por imagen  (camas mal etiquetadas / 4)
-    hamming_img = len(true_beds ^ pred_beds) / 4    # XOR
+    hamming_img = len(true_beds ^ pred_beds) / 4
     hamming_list.append(hamming_img)
 
 # Guardamos columnas nuevas
@@ -62,7 +63,7 @@ df["correct_beds"]  = correct_beds_flags
 df["hamming"]       = hamming_list
 
 # ----------------------------------------------------------------------
-# 4. Estadísticos globales
+# 4. Estadísticas principales
 # ----------------------------------------------------------------------
 N               = len(df)
 mae_count       = np.mean(err_counts)
@@ -83,18 +84,16 @@ summary_dict = {
 }
 
 # ----------------------------------------------------------------------
-# 5. Salida en consola
+# 6. Gráficos
 # ----------------------------------------------------------------------
+
 print("=== RESUMEN GLOBAL ===")
 for k, v in summary_dict.items():
     print(f"{k:<25}: {v}")
 print("\nPrimeras filas del detalle:")
 print(df.head())
 
-# ----------------------------------------------------------------------
-# 6. Gráficos
-# ----------------------------------------------------------------------
-# 6.1 Histograma del error de conteo
+# Error al contar vacas
 plt.figure(figsize=(8, 5))
 plt.hist(err_counts,
          bins=range(0, max(err_counts) + 2),
@@ -107,7 +106,7 @@ plt.tight_layout()
 plt.savefig("histograma_error_conteo.png")
 plt.close()
 
-# 6.2 Barras con métricas principales (los valores “altos son mejores”)
+# Barras con conteo, camas y hamming
 labels = ["Acc. conteo", "Acc. camas", "100-Hamming"]
 values = [accuracy_count, accuracy_beds, 100 - hamming_loss]
 
@@ -122,7 +121,7 @@ plt.tight_layout()
 plt.savefig("metricas_globales.png")
 plt.close()
 
-# 6.3 Guardar DataFrame con todas las métricas
+# Guardamos nuevo df con todas las metricas
 df.to_csv("metricas_detalladas.csv", index=False)
 
 print("\nSe han creado los archivos:")
