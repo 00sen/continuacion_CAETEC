@@ -50,6 +50,10 @@ Si se eligió (images)
 
 ### ⚙️ Personalización
 - Para cambiar los colores, grosor de los recuadros o texto, puedes modificar la función draw_boxes() en el archivo script.py
+- Las camas se delimitan por una calibración pre definida en `script.py` línea 47 esta se puede ajustar para tomar en cuenta variaciones en la posición de la cámara
+```python
+DIVS_X = [260, 720, 1200]   # Pixeles de las camas de izquierda a derecha
+```
 
 ### 🧯 Manejo de errores
 Si una imagen está dañada o no es reconocida, el script la omite automáticamente y continúa sin detenerse. Al final te reportará que imágenes fallaron.
