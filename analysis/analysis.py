@@ -19,7 +19,7 @@ def parse_beds_str(beds_str: str) -> set[int]:
     return set(int(x) for x in str(beds_str).split(",") if x.strip().isdigit())
 
 # ----------------------------------------------------------------------
-# 1. Carga de datos
+# Carga de datos
 # ----------------------------------------------------------------------
 # Predicciones
 df_pred = pd.read_csv(PREDS)
@@ -28,12 +28,12 @@ df_gt   = pd.read_csv(GROUND_TRUTH)
 df_gt = df_gt.rename(columns={"n_cows": "true_n_cows", "beds": "true_beds"})
 
 # ----------------------------------------------------------------------
-# 2. Juntamos ambos CSV en un dataframe
+# Juntamos ambos CSV en un dataframe
 # ----------------------------------------------------------------------
 df = pd.merge(df_gt, df_pred, on="filename", how="inner", validate="one_to_one")
 
 # ----------------------------------------------------------------------
-# 3. Datos por imagen
+# Datos por imagen
 # ----------------------------------------------------------------------
 err_counts           = []
 correct_count_flags  = []
@@ -63,7 +63,7 @@ df["correct_beds"]  = correct_beds_flags
 df["hamming"]       = hamming_list
 
 # ----------------------------------------------------------------------
-# 4. Estadísticas principales
+# Estadísticas principales
 # ----------------------------------------------------------------------
 N               = len(df)
 mae_count       = np.mean(err_counts)
@@ -84,7 +84,7 @@ summary_dict = {
 }
 
 # ----------------------------------------------------------------------
-# 6. Gráficos
+# Gráficas
 # ----------------------------------------------------------------------
 
 print("=== RESUMEN GLOBAL ===")
