@@ -130,3 +130,8 @@ print("  • histograma_error_conteo.png")
 print("  • metricas_globales.png")
 print("  • metricas_detalladas.csv")
 
+# Análisis de MAE
+df = pd.read_csv("metricas_detalladas.csv")
+mae  = np.mean(df["err_count"])
+
+print(f"MAE  : {mae:.3f} vacas")
